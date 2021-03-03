@@ -53,15 +53,15 @@ export default class Home extends React.Component {
     this.setState(newState);
   }
 
-  onDecrement(id) {
+  onDecrement(product) {
     const { cartCount } = this.state;
-    if (cartCount === 0) return;
+    if (product.quantity === 0) return;
     const { products } = this.state;
     const newState = {
       ...this.state,
       cartCount: cartCount - 1,
       products: products.map((eachProduct) => {
-        if (eachProduct.id === id && eachProduct.quantity > 0) {
+        if (eachProduct.id === product.id && eachProduct.quantity > 0) {
           return { ...eachProduct, quantity: eachProduct.quantity - 1 };
         }
         return eachProduct;
@@ -86,7 +86,7 @@ export default class Home extends React.Component {
               productPrice={product.price}
               productQuantity={product.quantity}
               onIncrement={() => { this.onIncrement(product.id); }}
-              onDecrement={() => { this.onDecrement(product.id); }}
+              onDecrement={() => { this.onDecrement(product); }}
             />
           ))}
         </div>

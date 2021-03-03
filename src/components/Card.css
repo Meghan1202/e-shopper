@@ -3,6 +3,7 @@
   transition: 0.3s;
   border-radius: 16px;
   max-width: fit-content;
+  padding: 8px;
 }
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(233, 200, 55, 0.308);

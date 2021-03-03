@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Card from './components/Card'
+import Home from './components/Home'
+import NavBar from './components/NavBar'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Card />
+    <Home/>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,18 +1,15 @@
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+// import PropTypes from 'prop-types';
 import React from 'react';
 
-const Quantity = ({ count }) => (
+const Quantity = ({ quantity, onIncrement, onDecrement }) => (
   <div>
-    <button type="button" onClick={() => { }}> - </button>
+    <button type="button" onClick={onDecrement}>-</button>
     <p>
-      {`${count} quantities`}
+      {`${quantity} quantities`}
     </p>
-    <button type="button"> + </button>
+    <button type="button" onClick={onIncrement}> + </button>
   </div>
 );
-
-Quantity.propTypes = {
-  count: PropTypes.string.isRequired,
-};
 
 export default Quantity;

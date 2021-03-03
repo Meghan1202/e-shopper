@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Quantity from './Quantity';
 
 const Product = ({
-  productName, productPrice, productId, productQuantity,
+  productName, productPrice, productId, productQuantity, onIncrement, onDecrement,
 }) => (
   <div className="card">
     <img id="banana__img" src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg" alt="Banana" />
@@ -22,7 +22,7 @@ const Product = ({
           Quantity:
           { productQuantity}
         </p>
-        <Quantity count={20} />
+        <Quantity quantity={productQuantity} onIncrement={onIncrement} onDecrement={onDecrement} />
       </div>
     </div>
   </div>
@@ -33,6 +33,8 @@ Product.propTypes = {
   productId: PropTypes.string.isRequired,
   productName: PropTypes.string.isRequired,
   productQuantity: PropTypes.string.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired,
 };
 
 export default Product;

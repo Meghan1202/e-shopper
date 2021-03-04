@@ -4,15 +4,25 @@
   border-radius: 16px;
   max-width: fit-content;
   padding: 8px;
+  margin: 10px;
 }
+
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(233, 200, 55, 0.308);
 }
 .container {
-  padding: 2px 16px;
+  padding: 2px;
 }
 
 #banana__img{
     width: 10rem;
     height: 10rem;
+}
+
+.inner__card{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: lightgrey;
+  border-radius: 16px;
 }

@@ -1,0 +1,9 @@
+.quantity__count{
+    display: flex;
+    align-items: center;
+}
+
+button{
+    height: 20px;
+    width: 20px;
+}

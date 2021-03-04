@@ -9,29 +9,44 @@ export default class Home extends React.Component {
     this.state = {
       products: [{
         id: 1,
-        name: 'Banana',
+        companyName: 'Fresho',
+        productName: 'Banana',
         price: 40,
-        quantity: 0,
+        quantity: '1 kg',
+        count: 0,
+        imgSrc: 'assets/fruits/banana.png',
       }, {
         id: 2,
-        name: 'Apple',
+        companyName: 'Fresho',
+        productName: 'Mango',
         price: 40,
-        quantity: 0,
+        quantity: '1 kg',
+        count: 0,
+        imgSrc: 'assets/fruits/mango.png',
       }, {
         id: 3,
-        name: 'Orange',
+        companyName: 'Fresho',
+        productName: 'Orange',
         price: 40,
-        quantity: 0,
+        quantity: '1 kg',
+        count: 0,
+        imgSrc: 'assets/fruits/orange.png',
       }, {
         id: 4,
-        name: 'Coconut',
+        companyName: 'Fresho',
+        productName: 'Apple',
         price: 40,
-        quantity: 0,
+        quantity: '1 kg',
+        count: 0,
+        imgSrc: 'assets/fruits/apple.png',
       }, {
         id: 5,
-        name: 'Banana',
+        companyName: 'Fresho',
+        productName: 'Strawberry',
         price: 40,
-        quantity: 0,
+        quantity: '1 kg',
+        count: 0,
+        imgSrc: 'assets/fruits/strawberry.png',
       }],
       cartCount: 0,
     };
@@ -45,7 +60,7 @@ export default class Home extends React.Component {
       cartCount: cartCount + 1,
       products: products.map((eachProduct) => {
         if (eachProduct.id === id) {
-          return { ...eachProduct, quantity: eachProduct.quantity + 1 };
+          return { ...eachProduct, count: eachProduct.count + 1 };
         }
         return eachProduct;
       }),
@@ -55,14 +70,14 @@ export default class Home extends React.Component {
 
   onDecrement(product) {
     const { cartCount } = this.state;
-    if (product.quantity === 0) return;
+    if (product.count === 0) return;
     const { products } = this.state;
     const newState = {
       ...this.state,
       cartCount: cartCount - 1,
       products: products.map((eachProduct) => {
-        if (eachProduct.id === product.id && eachProduct.quantity > 0) {
-          return { ...eachProduct, quantity: eachProduct.quantity - 1 };
+        if (eachProduct.id === product.id && eachProduct.count > 0) {
+          return { ...eachProduct, count: eachProduct.count - 1 };
         }
         return eachProduct;
       }),
@@ -82,9 +97,12 @@ export default class Home extends React.Component {
             <Product
               key={product.id}
               productId={product.id}
-              productName={product.name}
+              productName={product.productName}
               productPrice={product.price}
               productQuantity={product.quantity}
+              count={product.count}
+              companyName={product.companyName}
+              imgSrc={product.imgSrc}
               onIncrement={() => { this.onIncrement(product.id); }}
               onDecrement={() => { this.onDecrement(product); }}
             />

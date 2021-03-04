@@ -56,45 +56,56 @@ export default class App extends React.Component {
   }
 
   onIncrement = (id) => {
-    const { cartCount, products,cartItems } = this.state;
-    const newState = {
-      ...this.state,
-      cartCount: cartCount + 1,
-      products: products.map((eachProduct) => {
-        if (eachProduct.id === id) {
-          return { ...eachProduct, count: eachProduct.count + 1 };
+    const { products } = this.state;
+    this.setState((prevState) => {
+      let newState = {
+        ...prevState,
+        cartCount: prevState.cartCount + 1,
+        products: products.map((eachProduct) => 
+          (eachProduct.id === id ? {
+            ...eachProduct,
+            count: eachProduct.count + 1,
+          } :
+            eachProduct)
+        ),
+      };
+        newState = {
+          ...newState,
+          cartItems: newState.products.filter((product) => product.count > 0),
         }
-        return eachProduct;
-      }),
-      cartItems: products.filter((product) => product.count > 0),
-    };
-
-    this.setState(newState);
+        console.log(newState)
+      return newState;
+    });
   }
 
   onDecrement = (product) => {
-    const { cartCount } = this.state;
     if (product.count === 0) return;
     const { products } = this.state;
-    const newState = {
-      ...this.state,
-      cartCount: cartCount - 1,
-      products: products.map((eachProduct) => {
-        if (eachProduct.id === product.id && eachProduct.count > 0) {
-          return { ...eachProduct, count: eachProduct.count - 1 };
-        }
-        return eachProduct;
-      }),
+    this.setState((prevState) => {
+      let newState = {
+        ...prevState,
+        cartCount: prevState.cartCount - 1,
+        products: products.map((eachProduct) =>  (eachProduct.id === id && eachProduct.count> 0? {
+          ...eachProduct,
+          count: eachProduct.count - 1,
+        } :
+          eachProduct)
+      ),
     };
-    this.setState(newState);
+      newState = {
+        ...newState,
+        cartItems: newState.products.filter((product) => product.count > 0),
+      }
+    return newState;
+  });
   }
 
   render() {
-    const { products, cartCount } = this.state;
+    const { products, cartCount, cartItems } = this.state;
     return (
       <>
         <BrowserRouter>
-          <NavBar items={cartCount} cartItems={cartItems} />
+        <NavBar items={cartCount} />
           <Switch>
             <Route path="/" exact>
               <Home
@@ -103,7 +114,7 @@ export default class App extends React.Component {
                 onIncrement={this.onIncrement}
               />
             </Route>
-            <Route path="/Cart"><Cart /></Route>
+            <Route path="/Cart"><Cart cartItems={cartItems}/></Route>
           </Switch>
         </BrowserRouter>
       </>

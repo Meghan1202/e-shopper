@@ -1,10 +1,11 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Product from './Product';
 import './Home.css';
 
-const Home = ({ products, onIncrement, onDecrement }) => (
+const Home = ({ onIncrement, onDecrement, products }) => (
   <>
+    <h3> Fruits And Vegitables</h3>
     <div className="card__row">
       {products.map((product) => (
         <Product
@@ -24,4 +25,17 @@ const Home = ({ products, onIncrement, onDecrement }) => (
   </>
 );
 
+Home.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    companyName: PropTypes.string.isRequired,
+    productName: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    quantity: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    imgSrc: PropTypes.string.isRequired,
+  })).isRequired,
+  onDecrement: PropTypes.func.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+};
 export default Home;

@@ -1,11 +1,15 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
+import Cart from './components/Cart';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    console.log('hello');
     this.state = {
+      cartItems: [],
       products: [{
         id: 1,
         companyName: 'Fresho',
@@ -52,8 +56,7 @@ export default class App extends React.Component {
   }
 
   onIncrement = (id) => {
-    const { cartCount } = this.state;
-    const { products } = this.state;
+    const { cartCount, products,cartItems } = this.state;
     const newState = {
       ...this.state,
       cartCount: cartCount + 1,
@@ -63,7 +66,9 @@ export default class App extends React.Component {
         }
         return eachProduct;
       }),
+      cartItems: products.filter((product) => product.count > 0),
     };
+
     this.setState(newState);
   }
 
@@ -88,13 +93,19 @@ export default class App extends React.Component {
     const { products, cartCount } = this.state;
     return (
       <>
-        <NavBar items={cartCount} />
-        <h3> Fruits And Vegitables</h3>
-        <Home
-          products={products}
-          onDecrement={this.onDecrement}
-          onIncrement={this.onIncrement}
-        />
+        <BrowserRouter>
+          <NavBar items={cartCount} cartItems={cartItems} />
+          <Switch>
+            <Route path="/" exact>
+              <Home
+                products={products}
+                onDecrement={this.onDecrement}
+                onIncrement={this.onIncrement}
+              />
+            </Route>
+            <Route path="/Cart"><Cart /></Route>
+          </Switch>
+        </BrowserRouter>
       </>
     );
   }

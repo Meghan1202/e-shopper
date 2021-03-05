@@ -1,5 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import './Cart.css';
 
 const Cart = ({ cartItems }) => {
   const totalValue = cartItems.reduce(
@@ -7,7 +9,7 @@ const Cart = ({ cartItems }) => {
   );
   return (
     <>
-      <table className="c">
+      <table className="Cart__table">
         <thead>
           <tr>
             <th>Item Description</th>
@@ -28,15 +30,39 @@ const Cart = ({ cartItems }) => {
               <td>{cartItem.count * cartItem.price}</td>
             </tr>
           ))}
-          <tr>
-            <td>
-              {totalValue}
-            </td>
-          </tr>
         </tbody>
       </table>
+      <div className="Total__Value">
+        <h3>
+          TOTAL
+          {' '}
+          {totalValue}
+        </h3>
+        <hr />
+        <div className="Total__Value__container">
+          {totalValue > 0
+            ? (
+              <Link to="/Checkout">
+                {' '}
+                <button type="button" id="Checkout__button">CheckOut</button>
+              </Link>
+            ) : alert('No item in the My Basket')}
+        </div>
+      </div>
     </>
   );
+};
+
+Cart.propTypes = {
+  cartItems: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    companyName: PropTypes.string.isRequired,
+    productName: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    quantity: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    imgSrc: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default Cart;

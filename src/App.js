@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -112,6 +113,7 @@ export default class App extends React.Component {
               />
             </Route>
             <Route path="/Cart"><Cart cartItems={cartItems} /></Route>
+            <Route path="/Checkout"><Checkout /></Route>
           </Switch>
         </BrowserRouter>
       </>

@@ -7,7 +7,6 @@ import Cart from './components/Cart';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log('hello');
     this.state = {
       cartItems: [],
       products: [{
@@ -61,19 +60,16 @@ export default class App extends React.Component {
       let newState = {
         ...prevState,
         cartCount: prevState.cartCount + 1,
-        products: products.map((eachProduct) => 
-          (eachProduct.id === id ? {
-            ...eachProduct,
-            count: eachProduct.count + 1,
-          } :
-            eachProduct)
-        ),
-      };
-        newState = {
-          ...newState,
-          cartItems: newState.products.filter((product) => product.count > 0),
+        products: products.map((eachProduct) => (eachProduct.id === id ? {
+          ...eachProduct,
+          count: eachProduct.count + 1,
         }
-        console.log(newState)
+          : eachProduct)),
+      };
+      newState = {
+        ...newState,
+        cartItems: newState.products.filter((product) => product.count > 0),
+      };
       return newState;
     });
   }
@@ -85,19 +81,20 @@ export default class App extends React.Component {
       let newState = {
         ...prevState,
         cartCount: prevState.cartCount - 1,
-        products: products.map((eachProduct) =>  (eachProduct.id === id && eachProduct.count> 0? {
-          ...eachProduct,
-          count: eachProduct.count - 1,
-        } :
-          eachProduct)
-      ),
-    };
+        products: products.map(
+          (eachProduct) => (eachProduct.id === product.id && eachProduct.count > 0 ? {
+            ...eachProduct,
+            count: eachProduct.count - 1,
+          }
+            : eachProduct),
+        ),
+      };
       newState = {
         ...newState,
-        cartItems: newState.products.filter((product) => product.count > 0),
-      }
-    return newState;
-  });
+        cartItems: newState.products.filter((product_) => product_.count > 0),
+      };
+      return newState;
+    });
   }
 
   render() {
@@ -105,7 +102,7 @@ export default class App extends React.Component {
     return (
       <>
         <BrowserRouter>
-        <NavBar items={cartCount} />
+          <NavBar items={cartCount} />
           <Switch>
             <Route path="/" exact>
               <Home
@@ -114,7 +111,7 @@ export default class App extends React.Component {
                 onIncrement={this.onIncrement}
               />
             </Route>
-            <Route path="/Cart"><Cart cartItems={cartItems}/></Route>
+            <Route path="/Cart"><Cart cartItems={cartItems} /></Route>
           </Switch>
         </BrowserRouter>
       </>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import Home from './components/Home';
-import Cart from './components/Cart';
-import Checkout from './components/Checkout';
+import NavBar from './components/NavBar/NavBar';
+import Home from './components/Home/Home';
+import Cart from './components/Cart/Cart';
+import Checkout from './components/Checkout/Checkout';
+import Order from './components/Orders/Orders';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -112,8 +113,9 @@ export default class App extends React.Component {
                 onIncrement={this.onIncrement}
               />
             </Route>
-            <Route path="/Cart"><Cart cartItems={cartItems} /></Route>
-            <Route path="/Checkout"><Checkout /></Route>
+            <Route path="/cart"><Cart cartItems={cartItems} /></Route>
+            <Route path="/checkout"><Checkout /></Route>
+            <Route path="/allOrder"><Order noOfItems={cartItems.length} cartItems={cartItems} /></Route>
           </Switch>
         </BrowserRouter>
       </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Product.css';
 import PropTypes from 'prop-types';
-import Quantity from './Quantity';
+import Quantity from '../Quantity/Quantity';
 
 const Product = ({
   productName, productPrice, productQuantity, onIncrement, onDecrement, count, companyName, imgSrc,

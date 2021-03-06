@@ -1,0 +1,6 @@
+.Checkout__Container{
+    display: flex;
+    flex-wrap: wrap;
+    width: max-content;
+    height: max-content;
+}

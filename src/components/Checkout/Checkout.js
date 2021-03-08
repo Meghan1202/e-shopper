@@ -83,7 +83,7 @@ class Checkout extends React.Component {
               <br />
               <Field
                 name="name"
-                onClick={this.handleCheck}
+                onSubmit={this.handleCheck}
                 validate={validateName}
               />
               {errors.name && touched.name && <div>{errors.name}</div>}
@@ -92,17 +92,17 @@ class Checkout extends React.Component {
               <br />
               <Field
                 name="email"
-                onClick={this.handleCheck}
+                onSubmit={this.handleCheck}
                 validate={validateEmail}
               />
               {errors.email && touched.email && <div>{errors.email}</div>}
               <br />
               <span>Mobile Number:</span>
               <br />
-              <Field name="mobile" onClick={this.handleCheck} validate={validatePhone} />
+              <Field name="mobile" onSubmit={this.handleCheck} validate={validatePhone} />
               {errors.mobile && touched.mobile && <div>{errors.mobile}</div>}
               <br />
-              <button type="submit" onSubmit={this.handleSubmit}>submit</button>
+              <button type="submit">submit</button>
             </Form>
           )}
         </Formik>

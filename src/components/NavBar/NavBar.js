@@ -10,7 +10,7 @@ const NavBar = ({ items }) => (
       <Link to="/allOrder">All Orders</Link>
       {items > 0
         ? (
-          <Link className="active" to="/Cart">
+          <Link className="active" to="/cart">
             <img id="basket__image" src="https://img.freepik.com/free-vector/empty-wicker-basket-flowers-large-birds-nest-eggs_135176-431.jpg?size=626&ext=jpg" alt="Basket" />
             My Basket
             <span>
@@ -18,7 +18,7 @@ const NavBar = ({ items }) => (
             </span>
           </Link>
         ) : (
-          <Link className="active" to="/Cart">
+          <Link className="active" to="/cart">
             <img id="basket__image" src="https://img.freepik.com/free-vector/empty-wicker-basket-flowers-large-birds-nest-eggs_135176-431.jpg?size=626&ext=jpg" alt="Basket" />
             My Basket
             <span>

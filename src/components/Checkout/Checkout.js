@@ -30,6 +30,7 @@ function validatePhone(value) {
   return error;
 }
 
+// convert to functional component and use hook
 class Checkout extends React.Component {
   constructor() {
     super();
@@ -102,7 +103,7 @@ class Checkout extends React.Component {
               <Field name="mobile" onSubmit={this.handleCheck} validate={validatePhone} />
               {errors.mobile && touched.mobile && <div>{errors.mobile}</div>}
               <br />
-              <button type="submit">submit</button>
+              <button type="button" onClick={this.checkout}>submit</button>
             </Form>
           )}
         </Formik>

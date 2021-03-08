@@ -34,7 +34,7 @@ const Cart = ({ cartItems }) => {
             </div>
             <hr />
             <div className="Total__Value__container">
-              <Link to="/Checkout">
+              <Link to="/checkout">
                 {' '}
                 <button type="button" className="Checkout__button">CheckOut</button>
               </Link>

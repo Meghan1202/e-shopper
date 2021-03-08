@@ -6,6 +6,7 @@ import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
 import Order from './components/Orders/Orders';
 import Counter from './components/Counter/Counter';
+import ThemeContext, { Theme } from './ThemeContext';
 
 const App = () => {
   const [products, setProducts] = useState({
@@ -121,7 +122,9 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <NavBar items={products.cartCount} />
+        <ThemeContext.Provider value={Theme.light}>
+          <NavBar items={products.cartCount} />
+        </ThemeContext.Provider>
         <Switch>
           <Route path="/" exact>
             <Home

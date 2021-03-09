@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar should match snapshot for theme dark 1`] = `
+<div>
+  <div
+    class="topnav__dark"
+  >
+    <a
+      class="app__logo"
+      href="/"
+    >
+      E-Shopper
+    </a>
+    <br />
+    <div>
+      <a
+        href="/allOrder"
+      >
+        All Orders
+      </a>
+      <a
+        class="active"
+        href="/cart"
+      >
+        <img
+          alt="Basket"
+          id="basket__image"
+          src="https://img.freepik.com/free-vector/empty-wicker-basket-flowers-large-birds-nest-eggs_135176-431.jpg?size=626&ext=jpg"
+        />
+        My Basket
+        <span>
+          0
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NavBar should match snapshot for theme light 1`] = `
+<div>
+  <div
+    class="topnav__light"
+  >
+    <a
+      class="app__logo"
+      href="/"
+    >
+      E-Shopper
+    </a>
+    <br />
+    <div>
+      <a
+        href="/allOrder"
+      >
+        All Orders
+      </a>
+      <a
+        class="active"
+        href="/cart"
+      >
+        <img
+          alt="Basket"
+          id="basket__image"
+          src="https://img.freepik.com/free-vector/empty-wicker-basket-flowers-large-birds-nest-eggs_135176-431.jpg?size=626&ext=jpg"
+        />
+        My Basket
+        <span>
+          0
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+`;

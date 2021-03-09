@@ -3,7 +3,7 @@ import './Quantity.scss';
 import PropTypes from 'prop-types';
 
 const Quantity = ({ count, onIncrement, onDecrement }) => (
-  <div className="quantity__count">
+  <div data-testid="quantity-count" className="quantity__count">
     <button type="button" onClick={onDecrement}>-</button>
     <p>
       {`${count} in Basket`}

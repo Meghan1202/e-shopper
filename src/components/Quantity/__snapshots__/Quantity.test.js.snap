@@ -4,6 +4,7 @@ exports[`Quantity should match snapshot 1`] = `
 <div>
   <div
     class="quantity__count"
+    data-testid="quantity-count"
   >
     <button
       type="button"

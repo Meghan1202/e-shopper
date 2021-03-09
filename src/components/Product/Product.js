@@ -7,7 +7,7 @@ const Product = ({
   productName, productPrice, productQuantity, onIncrement, onDecrement, count, companyName, imgSrc,
 }) => (
   <div className="card">
-    <img id="banana__img" src={imgSrc} alt="Banana" />
+    <img data-testid="product-image" id="banana__img" src={imgSrc} alt="Banana" />
     <div className="container">
       <h4>
         {companyName}

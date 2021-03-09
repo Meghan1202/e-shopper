@@ -2,17 +2,18 @@ import React from 'react';
 import './Checkout.css';
 import { Formik, Form, Field } from 'formik';
 
-function validateEmail(value) {
-  let error;
-  if (!value) {
-    error = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    error = 'Invalid email address';
-  }
-  return error;
-}
+// function validateEmail(value) {
+//   let error;
+//   if (!value) {
+//     error = 'Required';
+//   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+//     error = 'Invalid email address';
+//   }
+//   return error;
+// }
 
 function validateName(value) {
+  console.log({ value });
   let error;
   if (!value) {
     error = 'Required';
@@ -42,7 +43,9 @@ class Checkout extends React.Component {
     };
   }
 
-  checkout = () => {
+  checkout = (event) => {
+    this.handleCheck(event);
+    console.log(event);
     this.setState({ checkoutMessage: 'Thank you for shopping with us!' });
   }
 
@@ -68,7 +71,9 @@ class Checkout extends React.Component {
   }
 
   render() {
-    const { checkoutMessage } = this.state;
+    const {
+      checkoutMessage,
+    } = this.state;
     return (
       <>
         <Formik
@@ -77,15 +82,23 @@ class Checkout extends React.Component {
             email: '',
             mobile: '',
           }}
+          onSubmit={(values, actions) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+
+              actions.setSubmitting(false);
+            }, 1000);
+          }}
         >
           {({ errors, touched }) => (
-            <Form onSubmit={this.checkout}>
+            <Form>
               <span>First name:</span>
               <br />
               <Field
                 name="name"
-                onSubmit={this.handleCheck}
+                // onChange={this.handleCheck}
                 validate={validateName}
+                // value={name}
               />
               {errors.name && touched.name && <div>{errors.name}</div>}
               <br />
@@ -93,14 +106,22 @@ class Checkout extends React.Component {
               <br />
               <Field
                 name="email"
-                onSubmit={this.handleCheck}
-                validate={validateEmail}
+                // onChange={this.handleCheck}
+                type="email"
+                // validate={validateEmail}
+                // value={email}
               />
               {errors.email && touched.email && <div>{errors.email}</div>}
               <br />
               <span>Mobile Number:</span>
               <br />
-              <Field name="mobile" onSubmit={this.handleCheck} validate={validatePhone} />
+              <Field
+                name="mobile"
+              // onChange={this.handleCheck}
+                validate={validatePhone}
+                // typ
+                // value={mobile}
+              />
               {errors.mobile && touched.mobile && <div>{errors.mobile}</div>}
               <br />
               <button type="button" onClick={this.checkout}>submit</button>

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import './NavBar.css';
+import './NavBar.scss';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ThemeContext from '../../ThemeContext';
@@ -7,8 +7,9 @@ import ThemeContext from '../../ThemeContext';
 const NavBar = ({ items }) => {
   const theme = useContext(ThemeContext);
   return (
-    <div className="topnav" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+    <div className={theme.backgroundColor === 'black' ? 'topnav__dark' : 'topnav__light'}>
       <Link className="app__logo" to="/">E-Shopper</Link>
+      <br />
       <div>
         <Link to="/allOrder">All Orders</Link>
         {items > 0

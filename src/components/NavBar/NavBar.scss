@@ -1,0 +1,59 @@
+.topnav__light {
+  display: flex;
+  background-color: #333;
+  overflow: hidden;
+  height: 75px;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.topnav__dark > a {
+  text-decoration: none;
+  color: white;
+}
+
+.topnav__light > a {
+  text-decoration: none;
+  color: black;
+}
+
+.topnav__dark {
+  display: flex;
+  background-color: black;
+  overflow: hidden;
+  height: 75px;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.topnav a.app__logo {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+a {
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+a.active {
+  color: white;
+}
+
+#basket__image {
+  width: 15px;
+  height: 15px;
+}

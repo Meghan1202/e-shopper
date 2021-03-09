@@ -1,5 +1,5 @@
 import React from 'react';
-import './Quantity.css';
+import './Quantity.scss';
 import PropTypes from 'prop-types';
 
 const Quantity = ({ count, onIncrement, onDecrement }) => (

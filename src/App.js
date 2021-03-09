@@ -5,7 +5,6 @@ import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
 import Order from './components/Orders/Orders';
-import Counter from './components/Counter/Counter';
 import ThemeContext, { Theme } from './ThemeContext';
 
 const App = () => {
@@ -119,10 +118,23 @@ const App = () => {
       return newState;
     });
   };
+
+  const [theme, setTheme] = useState('white');
+
+  const handleThemeChange = () => {
+    if (theme === 'white') {
+      setTheme('black');
+    } else {
+      setTheme('white');
+    }
+  };
+
   return (
     <>
+      <input type="checkbox" value="Dark mode" onClick={handleThemeChange} />
+      <span>{theme === 'white' ? 'Light mode' : 'Dark mode'}</span>
       <BrowserRouter>
-        <ThemeContext.Provider value={Theme.light}>
+        <ThemeContext.Provider value={theme === 'white' ? Theme.light : Theme.dark}>
           <NavBar items={products.cartCount} />
         </ThemeContext.Provider>
         <Switch>
@@ -136,7 +148,6 @@ const App = () => {
           <Route path="/cart"><Cart cartItems={products.cartItems} /></Route>
           <Route path="/checkout"><Checkout /></Route>
           <Route path="/allOrder"><Order noOfItems={products.cartItems.length} cartItems={products.cartItems} /></Route>
-          <Route path="/counter"><Counter /></Route>
         </Switch>
       </BrowserRouter>
     </>

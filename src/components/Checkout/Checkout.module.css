@@ -1,0 +1,25 @@
+.container {
+    padding: 1rem;
+  }
+  
+  .checkoutForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .checkoutForm > label {
+    margin: 1rem 0;
+  }
+  
+  .checkoutForm  input {
+    margin: 0 0 0 1rem;
+    font-size: 1rem;
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #e1e1e1;
+  }
+  
+  .placeOrder {
+    margin: 2rem 0;
+    align-self: flex-start;
+  }

@@ -4,6 +4,7 @@ exports[`Product should match snapshot 1`] = `
 <div>
   <div
     class="card"
+    data-testid="product-card"
   >
     <img
       alt="Banana"

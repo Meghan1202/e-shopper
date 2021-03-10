@@ -1,136 +1,103 @@
-import React from 'react';
-import './Checkout.css';
-import { Formik, Form, Field } from 'formik';
+import { useFormik } from 'formik';
+import React, { useState } from 'react';
+import Button from '../Button/Button';
+import checkoutSchema from '../../utils/validators/checkout-schema';
+import styles from './Checkout.module.css';
 
-// function validateEmail(value) {
-//   let error;
-//   if (!value) {
-//     error = 'Required';
-//   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-//     error = 'Invalid email address';
-//   }
-//   return error;
-// }
-
-function validateName(value) {
-  console.log({ value });
-  let error;
-  if (!value) {
-    error = 'Required';
-  }
-  return error;
-}
-
-function validatePhone(value) {
-  let error;
-  if (!value) {
-    error = 'Required';
-  } else if (!/^[789]\d{9}$/i.test(value)) {
-    error = 'Invalid Phone Number';
-  }
-  return error;
-}
-
-// convert to functional component and use hook
-class Checkout extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
+const Checkout = () => {
+  const [checkoutForm, setCheckoutForm] = useState({
+    formData: {
+      firstName: '',
+      lastName: '',
       email: '',
-      mobile: '',
-      checkoutMessage: '',
-    };
-  }
+      phoneNumber: '',
+    },
+    submitted: false,
+  });
 
-  checkout = (event) => {
-    this.handleCheck(event);
-    console.log(event);
-    this.setState({ checkoutMessage: 'Thank you for shopping with us!' });
-  }
+  const formik = useFormik({
+    initialValues: checkoutForm.formData,
+    validationSchema: checkoutSchema,
+    onSubmit: (formData) => setCheckoutForm({ formData, submitted: true }),
+  });
 
-  handleCheck= (event) => {
-    if (event.target.name === 'name') {
-      this.setState((prevState) => ({
-        ...prevState,
-        [event.target.name]: event.target.value,
-      }));
-    }
-    if (event.target.name === 'email') {
-      this.setState((prevState) => ({
-        ...prevState,
-        [event.target.name]: event.target.value,
-      }));
-    }
-    if (event.target.name === 'mobile') {
-      this.setState((prevState) => ({
-        ...prevState,
-        [event.target.name]: event.target.value,
-      }));
-    }
-  }
-
-  render() {
-    const {
-      checkoutMessage,
-    } = this.state;
-    return (
-      <>
-        <Formik
-          initialValues={{
-            name: '',
-            email: '',
-            mobile: '',
-          }}
-          onSubmit={(values, actions) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-
-              actions.setSubmitting(false);
-            }, 1000);
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form>
-              <span>First name:</span>
-              <br />
-              <Field
-                name="name"
-                // onChange={this.handleCheck}
-                validate={validateName}
-                // value={name}
+  return (
+    <div className={styles.container}>
+      <h1>Checkout</h1>
+      {!checkoutForm.submitted ? (
+        <>
+          <p>We&apos;ll require your contact information to send the items in your cart</p>
+          <form className={styles.checkoutForm} onSubmit={formik.handleSubmit}>
+            <label htmlFor="firstName">
+              First Name:
+              <input
+                name="firstName"
+                type="text"
+                placeholder="John"
+                onChange={formik.handleChange}
               />
-              {errors.name && touched.name && <div>{errors.name}</div>}
-              <br />
-              <span>Email:</span>
-              <br />
-              <Field
+            </label>
+            {formik.errors.firstName && (
+            <p>{formik.errors.firstName}</p>
+            )}
+            <label htmlFor="lastName">
+              Your name:
+              <input
+                name="lastName"
+                type="text"
+                placeholder="Doe"
+                onChange={formik.handleChange}
+              />
+            </label>
+            {formik.errors.lastName && (
+              <p>{formik.errors.lastName}</p>
+            )}
+            <label htmlFor="email">
+              Your email:
+              <input
                 name="email"
-                // onChange={this.handleCheck}
-                type="email"
-                // validate={validateEmail}
-                // value={email}
+                type="text"
+                placeholder="john_doe@example.com"
+                onChange={formik.handleChange}
               />
-              {errors.email && touched.email && <div>{errors.email}</div>}
-              <br />
-              <span>Mobile Number:</span>
-              <br />
-              <Field
-                name="mobile"
-              // onChange={this.handleCheck}
-                validate={validatePhone}
-                // typ
-                // value={mobile}
+            </label>
+            {formik.errors.email && (
+              <p>{formik.errors.email}</p>
+            )}
+            <label htmlFor="phoneNumber">
+              Your email:
+              <input
+                name="phoneNumber"
+                type="text"
+                placeholder="987654321"
+                onChange={formik.handleChange}
               />
-              {errors.mobile && touched.mobile && <div>{errors.mobile}</div>}
-              <br />
-              <button type="button" onClick={this.checkout}>submit</button>
-            </Form>
-          )}
-        </Formik>
-        <p>{checkoutMessage}</p>
-      </>
-    );
-  }
-}
+            </label>
+            {formik.errors.phoneNumber && (
+              <p>{formik.errors.phoneNumber}</p>
+            )}
+            <Button
+              primary
+              type="submit"
+              className={styles.placeOrder}
+            >
+              Place order
+            </Button>
+          </form>
+        </>
+      )
+        : (
+          <>
+            <p>
+              {`Your items will be sent to you soon, ${checkoutForm.formData.firstName}.`}
+            </p>
+            <p>
+              {`You receive updates on your phone - ${checkoutForm.formData.phoneNumber}`}
+            </p>
+          </>
+        )}
+    </div>
+  );
+};
+
 export default Checkout;

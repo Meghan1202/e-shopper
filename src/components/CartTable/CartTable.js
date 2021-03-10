@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './CartTable.css';
@@ -15,21 +16,45 @@ const CartTable = ({ cartItems }) => (
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="Row__Header" colSpan="4">Fruits & Vegitables</td>
-          </tr>
-          {cartItems.map((cartItem) => (
-            <tr key={cartItem.id}>
-              <td className="Item__Row">
-                <span className="Brand__Name">{cartItem.companyName}</span>
-                <br />
-                {cartItem.productName}
-              </td>
-              <td className="Item__Row">{cartItem.price}</td>
-              <td className="Item__Row">{cartItem.count}</td>
-              <td className="Item__Row">{cartItem.count * cartItem.price}</td>
-            </tr>
-          ))}
+          { Object.keys(cartItems).filter((key) => {
+            if (key.includes('id') || key.includes('date')) {
+              return false;
+            }
+            return true;
+          }).map((category) => (
+            <>
+              <tr>
+                <td className="Row__Header" colSpan="4">{category}</td>
+              </tr>
+              {cartItems[category].map((item) => (
+                <>
+                  <tr key={item.id} />
+                  <td className="Item__Row">
+                    <span className="Brand__Name">{item.companyName}</span>
+                    <br />
+                    {item.name}
+                  </td>
+                  <td className="Item__Row">{item.price}</td>
+                  <td className="Item__Row">{item.count}</td>
+                  <td className="Item__Row">{item.count * item.price}</td>
+                </>
+              ))}
+            </>
+          ),
+          // {cartItems.map((cartItem) => (
+          //   <tr key={cartItem.id}>
+            // <td className="Item__Row">
+            //   <span className="Brand__Name">{cartItem.companyName}</span>
+            //   <br />
+            //   {cartItem.productName}
+            // </td>
+            // <td className="Item__Row">{cartItem.price}</td>
+            // <td className="Item__Row">{cartItem.count}</td>
+            // <td className="Item__Row">{cartItem.count * cartItem.price}</td>
+          //   </tr>
+          //   )
+          // ) }
+          )}
         </tbody>
       </table>
     </div>

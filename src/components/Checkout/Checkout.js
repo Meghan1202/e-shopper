@@ -1,10 +1,16 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import axios from 'axios';
 import Button from '../Button/Button';
 import checkoutSchema from '../../utils/validators/checkout-schema';
 import styles from './Checkout.module.css';
 
-const Checkout = () => {
+const postCartData = async (cartData) => {
+  const response = await axios.post('/orders', cartData);
+  console.log(response);
+};
+
+const Checkout = ({ checkoutItems }) => {
   const [checkoutForm, setCheckoutForm] = useState({
     formData: {
       firstName: '',
@@ -80,6 +86,7 @@ const Checkout = () => {
               primary
               type="submit"
               className={styles.placeOrder}
+              onClick={() => { postCartData(checkoutItems()); }}
             >
               Place order
             </Button>

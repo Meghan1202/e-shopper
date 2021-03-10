@@ -8,62 +8,134 @@ import Checkout from './components/Checkout/Checkout';
 import Order from './components/Orders/Orders';
 import ThemeContext, { Theme } from './ThemeContext';
 
+const groupByCategory = (items) => {
+  const filteredProducts = { };
+  items.forEach((item) => {
+    if (filteredProducts[item.category]) {
+      filteredProducts[item.category].push(item);
+    } else {
+      filteredProducts[item.category] = [item];
+    }
+  });
+  return filteredProducts;
+};
+
 const getAllInventory = async (url) => {
   const apiResponse = await Axios.get(url);
   const jsonResponse = apiResponse.data;
   const items = jsonResponse.data.map((item) => {
     const modifiedItem = item;
-    modifiedItem.stock = item.count;
+    modifiedItem.stock = item.count ? item.count : 'Sold out!';
     modifiedItem.count = 0;
     modifiedItem.companyName = 'Bigbasket';
-    modifiedItem.imgSrc = item.img ? item.img : 'https://complianz.io/wp-content/uploads/2019/03/placeholder-300x202.jpg';
+    modifiedItem.imgSrc = modifiedItem.stock !== 'Sold out!' ? 'https://complianz.io/wp-content/uploads/2019/03/placeholder-300x202.jpg' : 'https://media.istockphoto.com/photos/red-stamp-on-a-white-background-sold-out-picture-id810509198';
     return item;
   });
-  return items;
+  return groupByCategory(items);
+};
+
+const getAllPastOrders = async (url) => {
+  const apiResponse = await Axios.get(url);
+  const jsonResponse = apiResponse.data.data;
+  const allOrders = [];
+  jsonResponse.forEach((order) => {
+    const orderOrganized = {};
+    order.items.forEach((item) => {
+      orderOrganized.id = order.id;
+      orderOrganized.date = order.date;
+      if (orderOrganized[item.category]) {
+        orderOrganized[item.category].push(item);
+      } else {
+        orderOrganized[item.category] = [item];
+      }
+    });
+    allOrders.push(orderOrganized);
+  });
+  return allOrders;
 };
 
 const App = () => {
-  const [products, setProducts] = useState([]);
-
-  const [cartItems, setCartItems] = useState([]);
-
+  const [products, setProducts] = useState({});
+  const [cartItems, setCartItems] = useState({});
   const [cartCount, setCartCount] = useState(0);
+  const [allOrders, setAllOrders] = useState([]);
 
   useEffect(async () => {
     const inventory = await getAllInventory('/items');
     setProducts(inventory);
   }, []);
 
-  const onIncrement = (product) => {
-    setCartCount(
-      product.stock > 0 ? cartCount + 1 : cartCount,
-    );
-    setProducts(
-      products.map((item) => {
-        const modifiedItem = item;
-        if (item.id === product.id && item.stock > 0) {
-          modifiedItem.stock -= 1;
-          modifiedItem.count += 1;
+  useEffect(async () => {
+    const pastOrdersData = await getAllPastOrders('/orders');
+    setAllOrders(pastOrdersData);
+  }, []);
+
+  const cartUpdate = () => {
+    const cart = [];
+    Object.keys(products).forEach((category) => {
+      products[category].forEach((product) => {
+        if (product.count) {
+          cart.push(product);
         }
-        return modifiedItem;
-      }),
-    );
+      });
+    });
+    return groupByCategory(cart);
   };
 
-  const onDecrement = (product) => {
-    setCartCount(
-      product.count > 0 ? cartCount + 1 : cartCount,
-    );
-    setProducts(
-      products.map((item) => {
-        const modifiedItem = item;
-        if (item.id === product.id && item.count > 0) {
-          modifiedItem.stock += 1;
-          modifiedItem.count -= 1;
+  const checkoutItems = () => {
+    const cart = [];
+    Object.keys(products).forEach((category) => {
+      products[category].forEach((product) => {
+        if (product.count) {
+          cart.push(product);
         }
-        return modifiedItem;
-      }),
-    );
+      });
+    });
+    return { items: cart };
+  };
+
+  const onIncrement = (id, category) => {
+    const productWithUpdatedCount = products[category].filter((product) => {
+      if (product.id === id) {
+        return true;
+      }
+      return false;
+    });
+    if (productWithUpdatedCount[0].stock > 0) {
+      setCartCount(cartCount + 1);
+    }
+    products[category] = products[category].map((product) => {
+      const modifiedItem = product;
+      if (product.id === id && product.stock > 0) {
+        modifiedItem.stock -= 1;
+        modifiedItem.count += 1;
+      }
+      return modifiedItem;
+    });
+    setProducts(products);
+    setCartItems(cartUpdate());
+  };
+
+  const onDecrement = (id, category) => {
+    const productWithUpdatedCount = products[category].filter((product) => {
+      if (product.id === id) {
+        return true;
+      }
+      return false;
+    });
+    if (productWithUpdatedCount[0].count > 0) {
+      setCartCount(cartCount - 1);
+    }
+    products[category] = products[category].map((product) => {
+      const modifiedItem = product;
+      if (product.id === id && product.count > 0) {
+        modifiedItem.count -= 1;
+        modifiedItem.stock += 1;
+      }
+      return modifiedItem;
+    });
+    setProducts(products);
+    setCartItems(cartUpdate());
   };
 
   const [theme, setTheme] = useState('white');
@@ -93,8 +165,8 @@ const App = () => {
             />
           </Route>
           <Route path="/cart"><Cart cartItems={cartItems} /></Route>
-          <Route path="/checkout"><Checkout /></Route>
-          <Route path="/allOrder"><Order noOfItems={cartItems.length} cartItems={cartItems} /></Route>
+          <Route path="/checkout"><Checkout checkoutItems={checkoutItems} /></Route>
+          <Route path="/allOrder"><Order noOfItems={cartItems.length} cartItems={allOrders} /></Route>
         </Switch>
       </BrowserRouter>
     </>

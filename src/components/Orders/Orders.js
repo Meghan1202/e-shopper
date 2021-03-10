@@ -9,23 +9,37 @@ function Order({ noOfItems, cartItems }) {
     <div>
       <p className="all-orders">All Orders</p>
       <hr />
-      <p className="past-orders">Past Orders(10)</p>
+      <p className="past-orders">
+        Past Orders(
+        {noOfItems}
+        )
+      </p>
+      {}
       <div className="order-table-container">
-        <table className="order-table">
-          <tr>
-            <th>Order</th>
-            <th>Item</th>
-            <th>Date</th>
-            <th>Amount</th>
-          </tr>
-          <tr className="order-details">
-            <td>order id: 12</td>
-            <td>{noOfItems}</td>
-            <td>Sun 04 March 2018 10:01 pm</td>
-            <td>883.00</td>
-          </tr>
-        </table>
-        <CartTable cartItems={cartItems} />
+        {cartItems.map((order) => (
+          <>
+            <table className="order-table">
+              <tr>
+                <th>Order</th>
+                <th>Item</th>
+                <th>Date</th>
+                <th>Amount</th>
+              </tr>
+              <tr className="order-details">
+                <td>
+                  order id:
+                  {' '}
+                  {order.id}
+                </td>
+                <td>{noOfItems}</td>
+                <td>{order.date}</td>
+                <td>{order.price}</td>
+              </tr>
+            </table>
+            <CartTable cartItems={order} />
+          </>
+        ))}
+
       </div>
     </div>
   );

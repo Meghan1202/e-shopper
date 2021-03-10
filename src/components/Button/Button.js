@@ -25,7 +25,7 @@ Button.propTypes = {
   children: PropTypes.string.isRequired,
   primary: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
-  type: PropTypes.oneOf('button', 'submit'),
+  type: PropTypes.oneOf(['button', 'submit']),
 };
 
 Button.defaultProps = {

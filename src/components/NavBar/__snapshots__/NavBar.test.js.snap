@@ -4,6 +4,7 @@ exports[`NavBar should match snapshot for theme dark 1`] = `
 <div>
   <div
     class="topnav__dark"
+    data-testid="nav-bar"
   >
     <a
       class="app__logo"
@@ -41,6 +42,7 @@ exports[`NavBar should match snapshot for theme light 1`] = `
 <div>
   <div
     class="topnav__light"
+    data-testid="nav-bar"
   >
     <a
       class="app__logo"

@@ -5,22 +5,24 @@ import './Home.css';
 
 const Home = ({ onIncrement, onDecrement, products }) => (
   <>
-    <h3> Fruits And Vegitables</h3>
-    <div className="card__row">
-      {products.map((product) => (
-        <Product
-          key={product.id}
-          productId={product.id}
-          productName={product.productName}
-          productPrice={product.price}
-          productQuantity={product.quantity}
-          count={product.count}
-          companyName={product.companyName}
-          imgSrc={product.imgSrc}
-          onIncrement={() => onIncrement(product.id)}
-          onDecrement={() => onDecrement(product)}
-        />
-      ))}
+    <div data-testid="home-page">
+      <h3> Fruits And Vegitables</h3>
+      <div className="card__row">
+        {products.map((product) => (
+          <Product
+            key={product.id}
+            productId={product.id}
+            productName={product.name}
+            productPrice={product.price}
+            productQuantity={product.stock}
+            count={product.count}
+            companyName={product.companyName}
+            imgSrc={product.imgSrc}
+            onIncrement={() => onIncrement(product)}
+            onDecrement={() => onDecrement(product)}
+          />
+        ))}
+      </div>
     </div>
   </>
 );
@@ -29,9 +31,9 @@ Home.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     companyName: PropTypes.string.isRequired,
-    productName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    quantity: PropTypes.string.isRequired,
+    stock: PropTypes.number.isRequired,
     count: PropTypes.number.isRequired,
     imgSrc: PropTypes.string.isRequired,
   })).isRequired,

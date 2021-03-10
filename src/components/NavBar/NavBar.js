@@ -7,7 +7,7 @@ import ThemeContext from '../../ThemeContext';
 const NavBar = ({ items }) => {
   const theme = useContext(ThemeContext);
   return (
-    <div className={theme.backgroundColor === 'black' ? 'topnav__dark' : 'topnav__light'}>
+    <div data-testid="nav-bar" className={theme.backgroundColor === 'black' ? 'topnav__dark' : 'topnav__light'}>
       <Link className="app__logo" to="/">E-Shopper</Link>
       <br />
       <div>

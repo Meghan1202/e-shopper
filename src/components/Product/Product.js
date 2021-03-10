@@ -31,7 +31,7 @@ const Product = ({
 Product.propTypes = {
   productPrice: PropTypes.number.isRequired,
   productName: PropTypes.string.isRequired,
-  productQuantity: PropTypes.string.isRequired,
+  productQuantity: PropTypes.number.isRequired,
   imgSrc: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
   companyName: PropTypes.string.isRequired,

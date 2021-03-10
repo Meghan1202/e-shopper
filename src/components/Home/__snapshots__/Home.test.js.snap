@@ -2,11 +2,15 @@
 
 exports[`Home should match snapshot for theme light 1`] = `
 <div>
-  <h3>
-     Fruits And Vegitables
-  </h3>
   <div
-    class="card__row"
-  />
+    data-testid="home-page"
+  >
+    <h3>
+       Fruits And Vegitables
+    </h3>
+    <div
+      class="card__row"
+    />
+  </div>
 </div>
 `;

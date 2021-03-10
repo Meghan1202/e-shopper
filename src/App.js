@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Axios from 'axios';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
@@ -7,116 +8,62 @@ import Checkout from './components/Checkout/Checkout';
 import Order from './components/Orders/Orders';
 import ThemeContext, { Theme } from './ThemeContext';
 
-const App = () => {
-  const [products, setProducts] = useState({
-    cartItems: [],
-    products: [{
-      id: 1,
-      companyName: 'Fresho',
-      productName: 'Banana',
-      price: 40,
-      quantity: '1 kg',
-      count: 0,
-      imgSrc: 'assets/fruits/banana.png',
-    }, {
-      id: 2,
-      companyName: 'Fresho',
-      productName: 'Mango',
-      price: 40,
-      quantity: '1 kg',
-      count: 0,
-      imgSrc: 'assets/fruits/mango.png',
-    }, {
-      id: 3,
-      companyName: 'Fresho',
-      productName: 'Orange',
-      price: 40,
-      quantity: '1 kg',
-      count: 0,
-      imgSrc: 'assets/fruits/orange.png',
-    }, {
-      id: 4,
-      companyName: 'Fresho',
-      productName: 'Apple',
-      price: 40,
-      quantity: '1 kg',
-      count: 0,
-      imgSrc: 'assets/fruits/apple.png',
-    }, {
-      id: 5,
-      companyName: 'Fresho',
-      productName: 'Strawberry',
-      price: 40,
-      quantity: '1 kg',
-      count: 0,
-      imgSrc: 'assets/fruits/strawberry.png',
-    }, {
-      id: 6,
-      companyName: 'Fresho',
-      productName: 'Strawberry',
-      price: 40,
-      quantity: '1 kg',
-      count: 0,
-      imgSrc: 'assets/fruits/strawberry.png',
-    }, {
-      id: 7,
-      companyName: 'Fresho',
-      productName: 'Strawberry',
-      price: 40,
-      quantity: '1 kg',
-      count: 0,
-      imgSrc: 'assets/fruits/strawberry.png',
-    }, {
-      id: 8,
-      companyName: 'Fresho',
-      productName: 'Strawberry',
-      price: 40,
-      quantity: '1 kg',
-      count: 0,
-      imgSrc: 'assets/fruits/strawberry.png',
-    }],
-    cartCount: 0,
+const getAllInventory = async (url) => {
+  const apiResponse = await Axios.get(url);
+  const jsonResponse = apiResponse.data;
+  const items = jsonResponse.data.map((item) => {
+    const modifiedItem = item;
+    modifiedItem.stock = item.count;
+    modifiedItem.count = 0;
+    modifiedItem.companyName = 'Bigbasket';
+    modifiedItem.imgSrc = item.img ? item.img : 'https://complianz.io/wp-content/uploads/2019/03/placeholder-300x202.jpg';
+    return item;
   });
+  return items;
+};
 
-  const onIncrement = (id) => {
-    setProducts((prevState) => {
-      let newState = {
-        ...prevState,
-        cartCount: prevState.cartCount + 1,
-        products: products.products.map((eachProduct) => (eachProduct.id === id ? {
-          ...eachProduct,
-          count: eachProduct.count + 1,
+const App = () => {
+  const [products, setProducts] = useState([]);
+
+  const [cartItems, setCartItems] = useState([]);
+
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(async () => {
+    const inventory = await getAllInventory('/items');
+    setProducts(inventory);
+  }, []);
+
+  const onIncrement = (product) => {
+    setCartCount(
+      product.stock > 0 ? cartCount + 1 : cartCount,
+    );
+    setProducts(
+      products.map((item) => {
+        const modifiedItem = item;
+        if (item.id === product.id && item.stock > 0) {
+          modifiedItem.stock -= 1;
+          modifiedItem.count += 1;
         }
-          : eachProduct)),
-      };
-      newState = {
-        ...newState,
-        cartItems: newState.products.filter((product) => product.count > 0),
-      };
-      return newState;
-    });
+        return modifiedItem;
+      }),
+    );
   };
 
   const onDecrement = (product) => {
-    if (product.count === 0) return;
-    setProducts((prevState) => {
-      let newState = {
-        ...prevState,
-        cartCount: prevState.cartCount - 1,
-        products: products.products.map(
-          (eachProduct) => (eachProduct.id === product.id && eachProduct.count > 0 ? {
-            ...eachProduct,
-            count: eachProduct.count - 1,
-          }
-            : eachProduct),
-        ),
-      };
-      newState = {
-        ...newState,
-        cartItems: newState.products.filter((product_) => product_.count > 0),
-      };
-      return newState;
-    });
+    setCartCount(
+      product.count > 0 ? cartCount + 1 : cartCount,
+    );
+    setProducts(
+      products.map((item) => {
+        const modifiedItem = item;
+        if (item.id === product.id && item.count > 0) {
+          modifiedItem.stock += 1;
+          modifiedItem.count -= 1;
+        }
+        return modifiedItem;
+      }),
+    );
   };
 
   const [theme, setTheme] = useState('white');
@@ -135,19 +82,19 @@ const App = () => {
       <span>{theme === 'white' ? 'Light mode' : 'Dark mode'}</span>
       <BrowserRouter>
         <ThemeContext.Provider value={theme === 'white' ? Theme.light : Theme.dark}>
-          <NavBar items={products.cartCount} />
+          <NavBar items={cartCount} />
         </ThemeContext.Provider>
         <Switch>
           <Route path="/" exact>
             <Home
-              products={products.products}
+              products={products}
               onDecrement={onDecrement}
               onIncrement={onIncrement}
             />
           </Route>
-          <Route path="/cart"><Cart cartItems={products.cartItems} /></Route>
+          <Route path="/cart"><Cart cartItems={cartItems} /></Route>
           <Route path="/checkout"><Checkout /></Route>
-          <Route path="/allOrder"><Order noOfItems={products.cartItems.length} cartItems={products.cartItems} /></Route>
+          <Route path="/allOrder"><Order noOfItems={cartItems.length} cartItems={cartItems} /></Route>
         </Switch>
       </BrowserRouter>
     </>

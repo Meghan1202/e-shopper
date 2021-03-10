@@ -2,6 +2,7 @@ import React from 'react';
 import './Product.css';
 import PropTypes from 'prop-types';
 import Quantity from '../Quantity/Quantity';
+import SoldOut from '../SoldOut/SoldOut';
 
 const Product = ({
   productName, productPrice, productQuantity, onIncrement, onDecrement, count, companyName, imgSrc,
@@ -22,7 +23,9 @@ const Product = ({
           {productPrice}
           /-
         </p>
-        <Quantity count={count} onIncrement={onIncrement} onDecrement={onDecrement} />
+        {productQuantity > 0
+          ? <Quantity count={count} onIncrement={onIncrement} onDecrement={onDecrement} />
+          : <SoldOut />}
       </div>
     </div>
   </div>

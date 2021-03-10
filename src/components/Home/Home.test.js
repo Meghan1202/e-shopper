@@ -24,8 +24,20 @@ describe(Home.name, () => {
     screen.getByText('Fruits And Vegitables');
   });
   test('should render the Product Component', () => {
-    const { product, onIncrement, onDecrement } = mockValue;
-    render(<Home products={product} onIncrement={onIncrement} onDecrement={onDecrement} />);
+    const { onIncrement, onDecrement } = mockValue;
+    render(<Home
+      products={[{
+        id: 1,
+        companyName: 'Fresho',
+        productName: 'Banana',
+        price: 40,
+        quantity: '1 kg',
+        count: 0,
+        imgSrc: 'assets/fruits/banana.png',
+      }]}
+      onIncrement={onIncrement}
+      onDecrement={onDecrement}
+    />);
     screen.getByTestId('product-card');
   });
 });

@@ -49,15 +49,7 @@ const Cart = ({ cartItems }) => {
   );
 };
 Cart.propTypes = {
-  cartItems: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    companyName: PropTypes.string.isRequired,
-    productName: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    quantity: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-  })).isRequired,
+  cartItems: PropTypes.objectOf(PropTypes.arrayOf(Object)).isRequired,
 };
 
 export default Cart;

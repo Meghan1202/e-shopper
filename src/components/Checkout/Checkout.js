@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import axios from 'axios';
 import Button from '../Button/Button';
@@ -107,4 +108,7 @@ const Checkout = ({ checkoutItems }) => {
   );
 };
 
+Checkout.propTypes = {
+  checkoutItems: PropTypes.func.isRequired,
+};
 export default Checkout;

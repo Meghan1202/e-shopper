@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './CartTable.css';
@@ -40,21 +39,7 @@ const CartTable = ({ cartItems }) => (
                 </>
               ))}
             </>
-          ),
-          // {cartItems.map((cartItem) => (
-          //   <tr key={cartItem.id}>
-            // <td className="Item__Row">
-            //   <span className="Brand__Name">{cartItem.companyName}</span>
-            //   <br />
-            //   {cartItem.productName}
-            // </td>
-            // <td className="Item__Row">{cartItem.price}</td>
-            // <td className="Item__Row">{cartItem.count}</td>
-            // <td className="Item__Row">{cartItem.count * cartItem.price}</td>
-          //   </tr>
-          //   )
-          // ) }
-          )}
+          ))}
         </tbody>
       </table>
     </div>

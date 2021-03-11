@@ -5,6 +5,23 @@ import '../CartTable/CartTable.css';
 import './Orders.css';
 
 function Order({ noOfItems, cartItems }) {
+  const getItemsInOrder = (order) => {
+    let itemCount = 0;
+    let amount = 0;
+    Object.keys(order).filter((key) => {
+      if (key === 'id' || key === 'date') {
+        return false;
+      }
+      return true;
+    }).forEach((key) => {
+      order[key].forEach((item) => {
+        itemCount += item.count;
+        amount += (item.price * item.count);
+      });
+    });
+    return [itemCount, amount];
+  };
+
   return (
     <div>
       <p className="all-orders">All Orders</p>
@@ -31,9 +48,9 @@ function Order({ noOfItems, cartItems }) {
                   {' '}
                   {order.id}
                 </td>
-                <td>{noOfItems}</td>
-                <td>{order.date}</td>
-                <td>{order.price}</td>
+                <td>{getItemsInOrder(order)[0]}</td>
+                <td>{new Date(order.date).toDateString()}</td>
+                <td>{getItemsInOrder(order)[1]}</td>
               </tr>
             </table>
             <CartTable cartItems={order} />

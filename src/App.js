@@ -59,11 +59,21 @@ const App = () => {
   const [cartItems, setCartItems] = useState({});
   const [cartCount, setCartCount] = useState(0);
   const [allOrders, setAllOrders] = useState([]);
+  const [isLoaded, setLoader] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(async () => {
+  const resetProductCache = async () => {
     const inventory = await getAllInventory('/items');
+    if (inventory) { setLoader(true); } else {
+      setError('Can not fetch');
+    }
     setProducts(inventory);
-  }, []);
+  };
+
+  useEffect(
+    resetProductCache,
+    [],
+  );
 
   useEffect(async () => {
     const pastOrdersData = await getAllPastOrders('/orders');
@@ -94,6 +104,15 @@ const App = () => {
     return { items: cart };
   };
 
+  const updateAllOrders = (orders) => {
+    setAllOrders(orders);
+  };
+
+  const resetCart = () => {
+    setCartItems([]);
+    setCartCount(0);
+  };
+
   const onIncrement = (id, category) => {
     const productWithUpdatedCount = products[category].filter((product) => {
       if (product.id === id) {
@@ -113,7 +132,8 @@ const App = () => {
       return modifiedItem;
     });
     setProducts(products);
-    setCartItems(cartUpdate());
+    const updatedCart = cartUpdate();
+    setCartItems(updatedCart);
   };
 
   const onDecrement = (id, category) => {
@@ -135,7 +155,8 @@ const App = () => {
       return modifiedItem;
     });
     setProducts(products);
-    setCartItems(cartUpdate());
+    const updatedCart = cartUpdate();
+    setCartItems(updatedCart);
   };
 
   const [theme, setTheme] = useState('white');
@@ -147,6 +168,17 @@ const App = () => {
       setTheme('white');
     }
   };
+
+  if (error !== null) {
+    return (
+      <div>error1.message</div>
+    );
+  }
+  if (!isLoaded) {
+    return (
+      <div>Loading...</div>
+    );
+  }
 
   return (
     <>
@@ -165,8 +197,8 @@ const App = () => {
             />
           </Route>
           <Route path="/cart"><Cart cartItems={cartItems} /></Route>
-          <Route path="/checkout"><Checkout checkoutItems={checkoutItems} /></Route>
-          <Route path="/allOrder"><Order noOfItems={cartItems.length} cartItems={allOrders} /></Route>
+          <Route path="/checkout"><Checkout checkoutItems={checkoutItems} updateAllOrders={updateAllOrders} allOrders={allOrders} resetCart={resetCart} resetProductCache={resetProductCache} /></Route>
+          <Route path="/allOrder"><Order noOfItems={allOrders.length} cartItems={allOrders} /></Route>
         </Switch>
       </BrowserRouter>
     </>

@@ -6,12 +6,18 @@ import Button from '../Button/Button';
 import checkoutSchema from '../../utils/validators/checkout-schema';
 import styles from './Checkout.module.css';
 
-const postCartData = async (cartData) => {
+const postCartData = async (cartData, updateAllOrders, pastOrdersData, resetCart, resetProductCache) => {
+  const pastOrders = pastOrdersData;
   const response = await axios.post('/orders', cartData);
-  console.log(response);
+  pastOrders.push(response.data.data);
+  updateAllOrders(pastOrders);
+  resetCart();
+  resetProductCache();
 };
 
-const Checkout = ({ checkoutItems }) => {
+const Checkout = ({
+  checkoutItems, updateAllOrders, allOrders, resetCart, resetProductCache,
+}) => {
   const [checkoutForm, setCheckoutForm] = useState({
     formData: {
       firstName: '',
@@ -87,7 +93,10 @@ const Checkout = ({ checkoutItems }) => {
               primary
               type="submit"
               className={styles.placeOrder}
-              onClick={() => { postCartData(checkoutItems()); }}
+              onClick={() => {
+                postCartData(checkoutItems(), updateAllOrders, allOrders,
+                  resetCart, resetProductCache);
+              }}
             >
               Place order
             </Button>

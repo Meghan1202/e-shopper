@@ -9,7 +9,7 @@ const Cart = ({ cartItems }) => {
   let totalValue = 0;
   Object.keys(cartItems).forEach((category) => {
     cartItems[category].forEach((item) => {
-      totalValue += item.price;
+      totalValue += (item.price * item.count);
     });
   });
   return (

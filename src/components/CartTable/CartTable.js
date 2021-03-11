@@ -15,7 +15,7 @@ const CartTable = ({ cartItems }) => (
           </tr>
         </thead>
         <tbody>
-          { Object.keys(cartItems).filter((key) => {
+          {Object.keys(cartItems).filter((key) => {
             if (key.includes('id') || key.includes('date')) {
               return false;
             }

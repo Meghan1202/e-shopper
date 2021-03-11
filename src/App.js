@@ -28,7 +28,7 @@ const getAllInventory = async (url) => {
     modifiedItem.stock = item.count ? item.count : 'Sold out!';
     modifiedItem.count = 0;
     modifiedItem.companyName = 'Bigbasket';
-    modifiedItem.imgSrc = modifiedItem.stock !== 'Sold out!' ? 'https://complianz.io/wp-content/uploads/2019/03/placeholder-300x202.jpg' : 'https://media.istockphoto.com/photos/red-stamp-on-a-white-background-sold-out-picture-id810509198';
+    modifiedItem.imgSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Culinary_fruits_front_view.jpg/800px-Culinary_fruits_front_view.jpg';
     return item;
   });
   return groupByCategory(items);

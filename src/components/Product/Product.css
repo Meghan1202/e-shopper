@@ -1,10 +1,10 @@
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  border-radius: 16px;
+  border-radius: 1rem;
   max-width: fit-content;
-  padding: 8px;
-  margin: 10px;
+  padding: 1rem;
+  margin: 2rem;
 }
 
 .card:hover {
@@ -14,9 +14,10 @@
   padding: 2px;
 }
 
-#banana__img{
+.banana__img{
     width: 10rem;
     height: 10rem;
+    border-radius: 0.5rem;
 }
 
 .inner__card{

@@ -4,7 +4,7 @@ import CartTable from '../CartTable/CartTable';
 import '../CartTable/CartTable.css';
 import './Orders.css';
 
-function Order({ noOfItems, cartItems }) {
+const Order = ({ noOfItems, cartItems }) => {
   const getItemsInOrder = (order) => {
     let itemCount = 0;
     let amount = 0;
@@ -34,44 +34,38 @@ function Order({ noOfItems, cartItems }) {
       {}
       <div className="order-table-container">
         {cartItems.map((order) => (
-          <>
+          <React.Fragment key={order.id}>
             <table className="order-table">
-              <tr>
-                <th>Order</th>
-                <th>Item</th>
-                <th>Date</th>
-                <th>Amount</th>
-              </tr>
-              <tr className="order-details">
-                <td>
-                  order id:
-                  {' '}
-                  {order.id}
-                </td>
-                <td>{getItemsInOrder(order)[0]}</td>
-                <td>{new Date(order.date).toDateString()}</td>
-                <td>{getItemsInOrder(order)[1]}</td>
-              </tr>
+              <tbody>
+                <tr key={order.id}>
+                  <th>Order</th>
+                  <th>Item</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                </tr>
+                <tr className="order-details">
+                  <td>
+                    order id:
+                    {' '}
+                    {order.id}
+                  </td>
+                  <td>{getItemsInOrder(order)[0]}</td>
+                  <td>{new Date(order.date).toDateString()}</td>
+                  <td>{getItemsInOrder(order)[1]}</td>
+                </tr>
+              </tbody>
             </table>
             <CartTable cartItems={order} />
-          </>
+          </React.Fragment>
         ))}
 
       </div>
     </div>
   );
-}
+};
 
 Order.propTypes = {
-  cartItems: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    companyName: PropTypes.string.isRequired,
-    productName: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    quantity: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-  })).isRequired,
+  cartItems: PropTypes.arrayOf(Object).isRequired,
   noOfItems: PropTypes.number.isRequired,
 };
 

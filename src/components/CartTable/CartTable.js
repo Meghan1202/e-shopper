@@ -21,24 +21,25 @@ const CartTable = ({ cartItems }) => (
             }
             return true;
           }).map((category) => (
-            <>
+            <React.Fragment key={category}>
               <tr>
                 <td className="Row__Header" colSpan="4">{category}</td>
               </tr>
               {cartItems[category].map((item) => (
-                <>
-                  <tr key={item.id} />
-                  <td className="Item__Row">
-                    <span className="Brand__Name">{item.companyName}</span>
-                    <br />
-                    {item.name}
-                  </td>
-                  <td className="Item__Row">{item.price}</td>
-                  <td className="Item__Row">{item.count}</td>
-                  <td className="Item__Row">{item.count * item.price}</td>
-                </>
+                <React.Fragment key={item.id}>
+                  <tr>
+                    <td className="Item__Row">
+                      <span className="Brand__Name">{item.companyName}</span>
+                      <br />
+                      {item.name}
+                    </td>
+                    <td className="Item__Row">{item.price}</td>
+                    <td className="Item__Row">{item.count}</td>
+                    <td className="Item__Row">{item.count * item.price}</td>
+                  </tr>
+                </React.Fragment>
               ))}
-            </>
+            </React.Fragment>
           ))}
         </tbody>
       </table>
@@ -47,14 +48,7 @@ const CartTable = ({ cartItems }) => (
 );
 
 CartTable.propTypes = {
-  cartItems: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    companyName: PropTypes.string.isRequired,
-    productName: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    quantity: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-  })).isRequired,
+  cartItems: PropTypes.objectOf(Array).isRequired,
 };
 
 export default CartTable;

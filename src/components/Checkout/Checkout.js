@@ -6,7 +6,8 @@ import Button from '../Button/Button';
 import checkoutSchema from '../../utils/validators/checkout-schema';
 import styles from './Checkout.module.css';
 
-const postCartData = async (cartData, updateAllOrders, pastOrdersData, resetCart, resetProductCache) => {
+const postCartData = async (cartData, updateAllOrders,
+  pastOrdersData, resetCart, resetProductCache) => {
   const pastOrders = pastOrdersData;
   const response = await axios.post('/orders', cartData);
   pastOrders.push(response.data.data);
@@ -119,5 +120,11 @@ const Checkout = ({
 
 Checkout.propTypes = {
   checkoutItems: PropTypes.func.isRequired,
+  allOrders: PropTypes.arrayOf(PropTypes.shape(
+    Object,
+  )).isRequired,
+  updateAllOrders: PropTypes.func.isRequired,
+  resetProductCache: PropTypes.func.isRequired,
+  resetCart: PropTypes.func.isRequired,
 };
 export default Checkout;

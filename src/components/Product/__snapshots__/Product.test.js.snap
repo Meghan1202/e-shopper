@@ -8,8 +8,8 @@ exports[`Product should match snapshot 1`] = `
   >
     <img
       alt="Banana"
+      class="banana__img"
       data-testid="product-image"
-      id="banana__img"
       src="abc"
     />
     <div
@@ -24,7 +24,7 @@ exports[`Product should match snapshot 1`] = `
         </b>
       </p>
       <p>
-        Quantity:
+        In Stock:
         2
       </p>
       <div

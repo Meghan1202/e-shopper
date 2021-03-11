@@ -3,7 +3,7 @@ import React from 'react';
 import CartTable from './CartTable';
 
 describe(CartTable.name, () => {
-  const mockCartItems = [];
+  const mockCartItems = {};
   afterEach(() => {
     jest.clearAllMocks();
   });

@@ -4,7 +4,7 @@ import Home from './Home';
 
 describe(Home.name, () => {
   const mockValue = {
-    product: [],
+    product: {},
     onIncrement: jest.fn(),
     onDecrement: jest.fn(),
   };
@@ -26,15 +26,8 @@ describe(Home.name, () => {
   test('should render the Product Component', () => {
     const { onIncrement, onDecrement } = mockValue;
     render(<Home
-      products={[{
-        id: 1,
-        companyName: 'Fresho',
-        productName: 'Banana',
-        price: 40,
-        quantity: '1 kg',
-        count: 0,
-        imgSrc: 'assets/fruits/banana.png',
-      }]}
+      products={{
+      }}
       onIncrement={onIncrement}
       onDecrement={onDecrement}
     />);

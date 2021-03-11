@@ -20,7 +20,7 @@ const groupByCategory = (items) => {
   return filteredProducts;
 };
 
-const getAllInventory = async (url) => {
+export const getAllInventory = async (url) => {
   const apiResponse = await Axios.get(url);
   const jsonResponse = apiResponse.data;
   const items = jsonResponse.data.map((item) => {
@@ -29,9 +29,14 @@ const getAllInventory = async (url) => {
     modifiedItem.count = 0;
     modifiedItem.companyName = 'Bigbasket';
     modifiedItem.imgSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Culinary_fruits_front_view.jpg/800px-Culinary_fruits_front_view.jpg';
-    return item;
+    return modifiedItem;
   });
-  return groupByCategory(items);
+  try {
+    return groupByCategory(items);
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
 };
 
 const getAllPastOrders = async (url) => {
@@ -63,11 +68,15 @@ const App = () => {
   const [error, setError] = useState(null);
 
   const resetProductCache = async () => {
-    const inventory = await getAllInventory('/items');
-    if (inventory) { setLoader(true); } else {
-      setError('Can not fetch');
+    try {
+      const inventory = await getAllInventory('/items');
+      if (inventory) { setLoader(true); } else {
+        setError('Can not fetch');
+      }
+      setProducts(inventory);
+    } catch (err) {
+      console.log(err);
     }
-    setProducts(inventory);
   };
 
   useEffect(

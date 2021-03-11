@@ -32,16 +32,7 @@ exports[`CartTable should match snapshot for the table 1`] = `
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td
-            class="Row__Header"
-            colspan="4"
-          >
-            Fruits & Vegitables
-          </td>
-        </tr>
-      </tbody>
+      <tbody />
     </table>
   </div>
 </div>

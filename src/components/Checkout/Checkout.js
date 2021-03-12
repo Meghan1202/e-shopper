@@ -6,11 +6,11 @@ import Button from '../Button/Button';
 import checkoutSchema from '../../utils/validators/checkout-schema';
 import styles from './Checkout.module.css';
 
-const postCartData = async (cartData, updateAllOrders,
+export const postCartData = async (cartData, updateAllOrders,
   pastOrdersData, resetCart, resetProductCache) => {
   let pastOrders = pastOrdersData;
-  const response = await axios.post('/orders', cartData);
-  pastOrders = [...pastOrders, response.data.data];
+  const response = await (await axios.post('/orders', cartData)).data;
+  pastOrders = [...pastOrders, response.data];
   updateAllOrders(pastOrders);
   resetCart();
   resetProductCache();

@@ -4,6 +4,7 @@ exports[`Button Should match the snapshot 1`] = `
 <div>
   <button
     class="abc secondary"
+    data-testid="Submit-button"
     type="button"
   >
     xyz

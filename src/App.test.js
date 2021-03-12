@@ -108,6 +108,14 @@ describe(App.name, () => {
     await waitFor(() => render(<App />));
     const incrementButton = screen.getByText('+');
     act(() => { fireEvent.click(incrementButton); });
+    screen.getByText('In Stock:1');
     screen.getByText('1 in Basket');
+  });
+  test('OnDecrement function has been called', async () => {
+    await waitFor(() => render(<App />));
+    const decrementButton = screen.getByText('-');
+    act(() => { fireEvent.click(decrementButton); });
+    screen.getByText('0 in Basket');
+    screen.getByText('In Stock:2');
   });
 });

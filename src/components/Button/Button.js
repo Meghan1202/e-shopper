@@ -15,6 +15,7 @@ const Button = ({
     // eslint-disable-next-line react/button-has-type
     type={type}
     onClick={onClick}
+    data-testid="Submit-button"
   >
     {children}
   </button>

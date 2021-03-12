@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkout should match the snapshot 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <h1>
+      Checkout
+    </h1>
+    <p>
+      We'll require your contact information to send the items in your cart
+    </p>
+    <form
+      class="checkoutForm"
+    >
+      <label
+        for="firstName"
+      >
+        First Name:
+        <input
+          name="firstName"
+          placeholder="John"
+          type="text"
+        />
+      </label>
+      <label
+        for="lastName"
+      >
+        Your name:
+        <input
+          name="lastName"
+          placeholder="Doe"
+          type="text"
+        />
+      </label>
+      <label
+        for="email"
+      >
+        Your email:
+        <input
+          name="email"
+          placeholder="john_doe@example.com"
+          type="text"
+        />
+      </label>
+      <label
+        for="phoneNumber"
+      >
+        Your email:
+        <input
+          name="phoneNumber"
+          placeholder="987654321"
+          type="text"
+        />
+      </label>
+      <button
+        class="placeOrder primary"
+        data-testid="Submit-button"
+        type="submit"
+      >
+        Place order
+      </button>
+    </form>
+  </div>
+</div>
+`;

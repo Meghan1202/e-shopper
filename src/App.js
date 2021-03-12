@@ -12,7 +12,7 @@ const groupByCategory = (items) => {
   const filteredProducts = { };
   items.forEach((item) => {
     if (filteredProducts[item.category]) {
-      filteredProducts[item.category].push(item);
+      filteredProducts[item.category] = [...filteredProducts[item.category], item];
     } else {
       filteredProducts[item.category] = [item];
     }
@@ -42,19 +42,19 @@ export const getAllInventory = async (url) => {
 const getAllPastOrders = async (url) => {
   const apiResponse = await Axios.get(url);
   const jsonResponse = apiResponse.data.data;
-  const allOrders = [];
+  let allOrders = [];
   jsonResponse.forEach((order) => {
     const orderOrganized = {};
     order.items.forEach((item) => {
       orderOrganized.id = order.id;
       orderOrganized.date = order.date;
       if (orderOrganized[item.category]) {
-        orderOrganized[item.category].push(item);
+        orderOrganized[item.category] = [...orderOrganized[item.category], item];
       } else {
         orderOrganized[item.category] = [item];
       }
     });
-    allOrders.push(orderOrganized);
+    allOrders = [...allOrders, orderOrganized];
   });
   return allOrders;
 };
@@ -90,11 +90,11 @@ const App = () => {
   }, []);
 
   const cartUpdate = () => {
-    const cart = [];
+    let cart = [];
     Object.keys(products).forEach((category) => {
       products[category].forEach((product) => {
         if (product.count) {
-          cart.push(product);
+          cart = [...cart, product];
         }
       });
     });
@@ -102,11 +102,11 @@ const App = () => {
   };
 
   const checkoutItems = () => {
-    const cart = [];
+    let cart = [];
     Object.keys(products).forEach((category) => {
       products[category].forEach((product) => {
         if (product.count) {
-          cart.push(product);
+          cart = [...cart, product];
         }
       });
     });

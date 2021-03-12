@@ -15,8 +15,7 @@ const Product = ({
       </h4>
       <p><b>{productName}</b></p>
       <p>
-        In Stock:
-        { productQuantity }
+        {`In Stock:${productQuantity}` }
       </p>
       <div className="inner__card">
         <p>

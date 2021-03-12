@@ -24,8 +24,7 @@ exports[`Product should match snapshot 1`] = `
         </b>
       </p>
       <p>
-        In Stock:
-        2
+        In Stock:2
       </p>
       <div
         class="inner__card"

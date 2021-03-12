@@ -33,8 +33,7 @@ exports[`Home should match snapshot for theme light 1`] = `
             </b>
           </p>
           <p>
-            In Stock:
-            2
+            In Stock:2
           </p>
           <div
             class="inner__card"

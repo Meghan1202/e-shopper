@@ -14,7 +14,7 @@ describe(App.name, () => {
             id: 1,
             name: 'apple',
             price: 120,
-            count: 1,
+            count: 2,
             category: 'Fruits & Vegatables',
             date: 1615122360481,
           }],
@@ -74,6 +74,10 @@ describe(App.name, () => {
 
   test('should render the home component and route to home page', async () => {
     await waitFor(() => render(<App />));
+    const eShopperButon = screen.getByText('E-Shopper');
+    act(() => { fireEvent.click(eShopperButon); });
+    screen.getByTestId('home-page');
+    expect(document.location.href).toBe('http://localhost/');
   });
 
   test('should fetch the data from external API call', async () => {
@@ -84,7 +88,7 @@ describe(App.name, () => {
             id: 1,
             name: 'apple',
             price: 120,
-            count: 1,
+            count: 2,
             category: 'Fruits & Vegatables',
             date: 1615122360481,
           }],
@@ -95,12 +99,15 @@ describe(App.name, () => {
     expect(spyOnAxios).toHaveBeenCalledWith(mockUrl);
     expect(response).toEqual({
       'Fruits & Vegatables': [{
-        category: 'Fruits & Vegatables', companyName: 'Bigbasket', count: 0, date: 1615122360481, id: 1, imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Culinary_fruits_front_view.jpg/800px-Culinary_fruits_front_view.jpg', name: 'apple', price: 120, stock: 1,
+        category: 'Fruits & Vegatables', companyName: 'Bigbasket', count: 0, date: 1615122360481, id: 1, imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Culinary_fruits_front_view.jpg/800px-Culinary_fruits_front_view.jpg', name: 'apple', price: 120, stock: 2,
       }],
     });
   });
 
-  test('', () => {
-
+  test('OnIncrement function has been called', async () => {
+    await waitFor(() => render(<App />));
+    const incrementButton = screen.getByText('+');
+    act(() => { fireEvent.click(incrementButton); });
+    screen.getByText('1 in Basket');
   });
 });

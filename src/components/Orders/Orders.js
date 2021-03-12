@@ -6,20 +6,19 @@ import './Orders.css';
 
 const Order = ({ noOfItems, cartItems }) => {
   const getItemsInOrder = (order) => {
-    let itemCount = 0;
-    let amount = 0;
-    Object.keys(order).filter((key) => {
+    const result = [].concat(...Object.keys(order).filter((key) => {
       if (key === 'id' || key === 'date') {
         return false;
       }
       return true;
-    }).forEach((key) => {
-      order[key].forEach((item) => {
-        itemCount += item.count;
-        amount += (item.price * item.count);
-      });
-    });
-    return [itemCount, amount];
+    })).reduce(({ itemCount, amount }, key) => order[key].reduce(
+      ({ itemCount: keyItemCount, amount: keyAmount }, item) => ({
+        itemCount: keyItemCount + item.count,
+        amount: keyAmount + (item.price * item.count),
+      }
+      ), { itemCount, amount },
+    ), { itemCount: 0, amount: 0 });
+    return result;
   };
 
   return (
@@ -48,9 +47,9 @@ const Order = ({ noOfItems, cartItems }) => {
                     {' '}
                     {order.id}
                   </td>
-                  <td>{getItemsInOrder(order)[0]}</td>
+                  <td>{getItemsInOrder(order).itemCount}</td>
                   <td>{new Date(order.date).toDateString()}</td>
-                  <td>{getItemsInOrder(order)[1]}</td>
+                  <td>{getItemsInOrder(order).amount}</td>
                 </tr>
               </tbody>
             </table>

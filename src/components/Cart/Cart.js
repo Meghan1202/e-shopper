@@ -6,12 +6,8 @@ import CartTable from '../CartTable/CartTable';
 import '../CartTable/CartTable.css';
 
 const Cart = ({ cartItems }) => {
-  let totalValue = 0;
-  Object.keys(cartItems).forEach((category) => {
-    cartItems[category].forEach((item) => {
-      totalValue += (item.price * item.count);
-    });
-  });
+  const totalValue = [].concat(...Object.values(cartItems))
+    .reduce((amount, item) => amount + (item.price * item.count), 0);
   return (
     <>
       <div className="Cart__Body" data-testid="Cart">
@@ -49,7 +45,7 @@ const Cart = ({ cartItems }) => {
   );
 };
 Cart.propTypes = {
-  cartItems: PropTypes.objectOf(PropTypes.arrayOf(Object)).isRequired,
+  cartItems: PropTypes.objectOf(Array).isRequired,
 };
 
 export default Cart;

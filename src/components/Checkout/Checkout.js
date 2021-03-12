@@ -8,9 +8,9 @@ import styles from './Checkout.module.css';
 
 const postCartData = async (cartData, updateAllOrders,
   pastOrdersData, resetCart, resetProductCache) => {
-  const pastOrders = pastOrdersData;
+  let pastOrders = pastOrdersData;
   const response = await axios.post('/orders', cartData);
-  pastOrders.push(response.data.data);
+  pastOrders = [...pastOrders, response.data.data];
   updateAllOrders(pastOrders);
   resetCart();
   resetProductCache();

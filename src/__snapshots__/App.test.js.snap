@@ -73,8 +73,7 @@ exports[`App should match the snapshot 1`] = `
             </b>
           </p>
           <p>
-            In Stock:
-            1
+            In Stock:2
           </p>
           <div
             class="inner__card"

@@ -1,64 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Order should match the snapshot 1`] = `
+exports[`Cart should match the snapshot 1`] = `
 <div>
   <div
-    data-testid="All-Order"
+    class="Cart__Body"
+    data-testid="Cart"
   >
-    <p
-      class="all-orders"
-    >
-      All Orders
-    </p>
-    <hr />
-    <p
-      class="past-orders"
-    >
-      Past Orders(
-      1
-      )
-    </p>
     <div
-      class="order-table-container"
+      class="Cart__Container"
     >
-      <table
-        class="order-table"
-      >
-        <tbody>
-          <tr>
-            <th>
-              Order
-            </th>
-            <th>
-              Item
-            </th>
-            <th>
-              Date
-            </th>
-            <th>
-              Amount
-            </th>
-          </tr>
-          <tr
-            class="order-details"
-          >
-            <td>
-              order id:
-               
-              1
-            </td>
-            <td>
-              1
-            </td>
-            <td>
-              Sun Mar 07 2021
-            </td>
-            <td>
-              120
-            </td>
-          </tr>
-        </tbody>
-      </table>
       <div
         class="Cart__Table__Container"
         data-testid="Cart-Table"
@@ -105,28 +55,77 @@ exports[`Order should match the snapshot 1`] = `
               >
                 <span
                   class="Brand__Name"
-                />
+                >
+                  Bigbasket
+                </span>
                 <br />
-                apple
+                grapes
               </td>
               <td
                 class="Item__Row"
               >
-                120
+                50
               </td>
               <td
                 class="Item__Row"
               >
-                1
+                2
               </td>
               <td
                 class="Item__Row"
               >
-                120
+                100
               </td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <div
+      class="Checkout__And__Continue__Container"
+    >
+      <a
+        href="/"
+      >
+        <button
+          class="Shop__button"
+          type="button"
+        >
+          Continue Shopping
+        </button>
+      </a>
+      <div
+        class="Total__Value"
+      >
+        <div
+          class="Value__Container"
+        >
+          <h3>
+            TOTAL
+             
+          </h3>
+          <h3>
+            Rs.
+             
+            100
+          </h3>
+        </div>
+        <hr />
+        <div
+          class="Total__Value__container"
+        >
+          <a
+            href="/checkout"
+          >
+             
+            <button
+              class="Checkout__button"
+              type="button"
+            >
+              CheckOut
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   </div>

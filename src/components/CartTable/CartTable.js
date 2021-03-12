@@ -4,7 +4,7 @@ import './CartTable.css';
 
 const CartTable = ({ cartItems }) => (
   <>
-    <div className="Cart__Table__Container">
+    <div className="Cart__Table__Container" data-testid="Cart-Table">
       <table className="Cart__Table">
         <thead>
           <tr>

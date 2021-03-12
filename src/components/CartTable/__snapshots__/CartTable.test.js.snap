@@ -4,6 +4,7 @@ exports[`CartTable should match snapshot for the table 1`] = `
 <div>
   <div
     class="Cart__Table__Container"
+    data-testid="Cart-Table"
   >
     <table
       class="Cart__Table"

@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Order should match the snapshot 1`] = `
+<div>
+  <div
+    data-testid="All-Order"
+  >
+    <p
+      class="all-orders"
+    >
+      All Orders
+    </p>
+    <hr />
+    <p
+      class="past-orders"
+    >
+      Past Orders(
+      1
+      )
+    </p>
+    <div
+      class="order-table-container"
+    >
+      <table
+        class="order-table"
+      >
+        <tbody>
+          <tr>
+            <th>
+              Order
+            </th>
+            <th>
+              Item
+            </th>
+            <th>
+              Date
+            </th>
+            <th>
+              Amount
+            </th>
+          </tr>
+          <tr
+            class="order-details"
+          >
+            <td>
+              order id:
+               
+              1
+            </td>
+            <td>
+              1
+            </td>
+            <td>
+              Sun Mar 07 2021
+            </td>
+            <td>
+              120
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        class="Cart__Table__Container"
+      >
+        <table
+          class="Cart__Table"
+        >
+          <thead>
+            <tr>
+              <th
+                class="Item__Header"
+              >
+                Item Description
+              </th>
+              <th
+                class="Item__Header"
+              >
+                Unit Price
+              </th>
+              <th
+                class="Item__Header"
+              >
+                Quantity
+              </th>
+              <th
+                class="Item__Header"
+              >
+                Sub Total
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                class="Row__Header"
+                colspan="4"
+              >
+                Fruits & Vegatables
+              </td>
+            </tr>
+            <tr>
+              <td
+                class="Item__Row"
+              >
+                <span
+                  class="Brand__Name"
+                />
+                <br />
+                apple
+              </td>
+              <td
+                class="Item__Row"
+              >
+                120
+              </td>
+              <td
+                class="Item__Row"
+              >
+                1
+              </td>
+              <td
+                class="Item__Row"
+              >
+                120
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+`;

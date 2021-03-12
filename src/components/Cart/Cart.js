@@ -14,7 +14,7 @@ const Cart = ({ cartItems }) => {
   });
   return (
     <>
-      <div className="Cart__Body">
+      <div className="Cart__Body" data-testid="Cart">
         <div className="Cart__Container">
           <CartTable cartItems={cartItems} />
         </div>

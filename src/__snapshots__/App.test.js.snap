@@ -2,8 +2,109 @@
 
 exports[`App should match the snapshot 1`] = `
 <div>
-  <div>
-    Loading...
+  <input
+    type="checkbox"
+    value="Dark mode"
+  />
+  <span>
+    Light mode
+  </span>
+  <div
+    class="topnav__light"
+    data-testid="nav-bar"
+  >
+    <a
+      class="app__logo"
+      href="/"
+    >
+      E-Shopper
+    </a>
+    <br />
+    <div>
+      <a
+        href="/allOrder"
+      >
+        All Orders
+      </a>
+      <a
+        class="active"
+        href="/cart"
+      >
+        <img
+          alt="Basket"
+          id="basket__image"
+          src="https://img.freepik.com/free-vector/empty-wicker-basket-flowers-large-birds-nest-eggs_135176-431.jpg?size=626&ext=jpg"
+        />
+        My Basket
+        <span>
+          0
+        </span>
+      </a>
+    </div>
+  </div>
+  <div
+    data-testid="home-page"
+  >
+    <h3>
+      Fruits & Vegatables
+    </h3>
+    <div
+      class="card__row"
+    >
+      <div
+        class="card"
+        data-testid="product-card"
+      >
+        <img
+          alt="Banana"
+          class="banana__img"
+          data-testid="product-image"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Culinary_fruits_front_view.jpg/800px-Culinary_fruits_front_view.jpg"
+        />
+        <div
+          class="container"
+        >
+          <h4>
+            Bigbasket
+          </h4>
+          <p>
+            <b>
+              apple
+            </b>
+          </p>
+          <p>
+            In Stock:
+            1
+          </p>
+          <div
+            class="inner__card"
+          >
+            <p>
+              120
+              /-
+            </p>
+            <div
+              class="quantity__count"
+              data-testid="quantity-count"
+            >
+              <button
+                type="button"
+              >
+                -
+              </button>
+              <p>
+                0 in Basket
+              </p>
+              <button
+                type="button"
+              >
+                 + 
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

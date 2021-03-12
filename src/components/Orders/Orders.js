@@ -23,7 +23,7 @@ const Order = ({ noOfItems, cartItems }) => {
   };
 
   return (
-    <div>
+    <div data-testid="All-Order">
       <p className="all-orders">All Orders</p>
       <hr />
       <p className="past-orders">
@@ -31,7 +31,6 @@ const Order = ({ noOfItems, cartItems }) => {
         {noOfItems}
         )
       </p>
-      {}
       <div className="order-table-container">
         {cartItems.map((order) => (
           <React.Fragment key={order.id}>

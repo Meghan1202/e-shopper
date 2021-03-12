@@ -7,6 +7,7 @@ const Home = ({
   onIncrement, onDecrement, products,
 }) => (
   <>
+    {console.log(products)}
     <div data-testid="home-page">
       {Object.keys(products).map((category) => (
         <React.Fragment key={category}>

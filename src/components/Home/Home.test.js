@@ -4,7 +4,20 @@ import Home from './Home';
 
 describe(Home.name, () => {
   const mockValue = {
-    product: {},
+    product: {
+      'Dairy & Eggs': [
+        {
+          category: 'Dairy & Eggs',
+          companyName: 'Bigbasket',
+          count: 0,
+          id: 5,
+          imgSrc: 'abc',
+          name: 'milk',
+          price: 10,
+          stock: 2,
+        },
+      ],
+    },
     onIncrement: jest.fn(),
     onDecrement: jest.fn(),
   };
@@ -21,13 +34,12 @@ describe(Home.name, () => {
   test('should display the category name', () => {
     const { product, onIncrement, onDecrement } = mockValue;
     render(<Home products={product} onIncrement={onIncrement} onDecrement={onDecrement} />);
-    screen.getByText('Fruits And Vegitables');
+    screen.getByText('Dairy & Eggs');
   });
   test('should render the Product Component', () => {
-    const { onIncrement, onDecrement } = mockValue;
+    const { product, onIncrement, onDecrement } = mockValue;
     render(<Home
-      products={{
-      }}
+      products={product}
       onIncrement={onIncrement}
       onDecrement={onDecrement}
     />);
